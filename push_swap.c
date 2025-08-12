@@ -6,12 +6,11 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/11 17:33:47 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:55:46 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	get_size(char **split)
 {
@@ -36,6 +35,7 @@ int *new_value(int value)
 
 void	fill_stack(char *split, t_stack **a)
 {
+	static int	repeted_pos[INT_MAX];
 	int	i;
 	int	number;
 	int *value;
@@ -49,12 +49,14 @@ void	fill_stack(char *split, t_stack **a)
 			return ((void) 0);
 		number = split[i] - '0' + number * 10;
 	}
+	if ((number >= 0 && repeted_pos[number] == 1))
+		return	;
 	value = new_value(number);
 	new = lstnew(value);
 	lstadd_front(a, new);
+	repeted_pos[number] = 1;
 	if (!a)
-		return ((void) 0);
-	
+		return	;
 }
 
 void	make_stack(int argc, char **argv, t_stack **a)
@@ -72,7 +74,7 @@ void	make_stack(int argc, char **argv, t_stack **a)
 		{
 			fill_stack(split[j], a);
 			if (!a)
-				return (0);
+				return ((void)0);
 			free(split[j]);
 		}
 		free(split);
@@ -90,6 +92,11 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	make_stack(argc, argv, &a);
+	while (a)
+	{
+		printf("%d\n", a->content[0]);
+		a = a->next;
+	}
 	if (!a)
 		return (0);
 	lstclear(&a);
