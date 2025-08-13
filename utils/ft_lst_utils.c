@@ -13,12 +13,22 @@ t_stack	*lstnew(int *content)
 	return (node);
 }
 
-void	lstdelone(t_stack *lst, void (*del)(void *))
+int	check_lstrepetition(t_stack **lst, int number)
 {
-	if (!lst || !del)
-		return ;
-	del(lst -> content);
-	free(lst);
+	t_stack *tmp;
+	t_stack *head;
+
+	if (!*lst)
+		return (1);
+	head = *lst;
+	tmp = head -> next;
+	while (tmp && tmp != head)
+	{
+		if (tmp -> content[0] == number)
+			return (0);
+		tmp = tmp -> next;
+	}
+	return (1);
 }
 
 void lstclear(t_stack **lst)

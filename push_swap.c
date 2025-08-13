@@ -63,21 +63,18 @@ static int	make_stack(int argc, char **argv, t_stack **a)
 
 static int	fill_stack(char *split, t_stack **a)
 {
-	static int	repeted_pos[INT_MAX];
 	int 		*value;
-	long		number;
+	int			number;
 	t_stack 	*new;
 
 	number = 0;
-	if (ft_break_atoi(split, &number))
+	if (!ft_break_atoi(split, &number))
 		return (0);
-	if ((number > INT_MAX || number < INT_MIN) || (
-		number >= 0 && repeted_pos[(int) number] == 1))
+	if (!check_lstrepetition(a, number))
 		return (0);
 	value = new_value(number);
 	new = lstnew(value);
 	lstadd_back(a, new);
-	repeted_pos[number] = 1;
 	if (!a)
 		return (0);
 	return (1);

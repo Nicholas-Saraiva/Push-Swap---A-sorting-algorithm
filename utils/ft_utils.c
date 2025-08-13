@@ -34,17 +34,28 @@ int *new_value(int value)
 	return (new_value);
 }
 
-long	ft_break_atoi(const char *split, long *number)
+int	ft_break_atoi(const char *split, int *number)
 {
-	int			i;
+	int		i;
+	long	new_number;
 
 	i = -1;
-	*number = 0;
-	while (split[++i] && (*number >= INT_MIN || *number <= INT_MAX))
+	new_number = 0;
+	while (split[++i] && (new_number >= INT_MIN || new_number <= INT_MAX))
 	{
 		if (split[i] < '0'  || split[i] > '9')
 			return (0);
-		*number = split[i] - '0' + *number * 10;
+		new_number = split[i] - '0' + new_number * 10;
 	}
+	if ((new_number < INT_MIN || new_number > INT_MAX))
+		return (0);
+	*number = (int) new_number;
 	return (1);
+}
+
+int		ft_abs(const int number)
+{
+	if (number < 0)
+		return (number * (-1));
+	return (number);
 }

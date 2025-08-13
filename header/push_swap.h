@@ -32,14 +32,15 @@ void	free_char_array(char **array);
 
 //----------List-Utils
 t_stack	*lstnew(int *content);
-void	lstdelone(t_stack *lst, void (*del)(void *));
 void	lstclear(t_stack **lst);
 void	lstadd_front(t_stack **lst, t_stack *new);
 void	lstadd_back(t_stack **lst, t_stack *new);
+int		check_lstrepetition(t_stack **lst, int number);
 
 //----------Utils
-long	ft_break_atoi(const char *split, long *number);
+int		ft_break_atoi(const char *split, int *number);
 int 	*new_value(int value);
 int		get_size(char **split);
+int		ft_abs(const int number);
 
 #endif
