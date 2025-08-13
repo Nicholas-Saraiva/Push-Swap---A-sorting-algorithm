@@ -5,7 +5,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": ["3", "3", "5"],
+      "args": ["109239 09213021 9213902 92189214 129 8310294 8 29847893a"],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/alexandria/library/42Cursos/push_swap",

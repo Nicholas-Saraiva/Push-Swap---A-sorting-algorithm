@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 SRC = push_swap.c
-SRC += utils/ft_error.c utils/ft_lst_utils.c
+SRC += utils/ft_error.c utils/ft_lst_utils.c utils/ft_utils.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = includes/libft 
