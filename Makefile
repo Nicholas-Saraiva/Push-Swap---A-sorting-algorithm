@@ -9,7 +9,8 @@
 #    Updated: 2025/08/12 10:28:57 by nsaraiva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRC = push_swap.c ft_utils.c
+SRC = push_swap.c
+SRC += utils/ft_error.c utils/ft_lst_utils.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = includes/libft 
@@ -17,7 +18,7 @@ LIBFT_A = $(addprefix $(LIBFT), libft.a)
 
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror -g
-LIBRARIES = -I$(LIBFT) -L$(LIBFT) -lft
+LIBRARIES = -Iheader -I$(LIBFT) -L$(LIBFT) -lft
 NAME = push_swap
 
 all : $(NAME) 

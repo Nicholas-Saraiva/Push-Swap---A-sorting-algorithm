@@ -12,8 +12,24 @@
 
 #include "push_swap.h"
 
-void	ft_error(char *msg)
+void	ft_error(t_stack **a, t_stack **b)
 {
-	perror(msg);
+	if (a)
+		lstclear(a);
+	if (b)
+		lstclear(b);
+	ft_putstr_fd("ERROR\n", 2);
 	exit(-1);
+}
+
+void	free_char_array(char **array)
+{
+	int	i;
+
+	i = -1;
+	while (array[++i])
+		if (array[i])
+			free(array[i]);
+	if (array)
+		free(array);
 }
