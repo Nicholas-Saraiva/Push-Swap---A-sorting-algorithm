@@ -26,7 +26,7 @@ int	check_lstrepetition(t_stack **lst, int number)
 	{
 		if (tmp -> content[0] == number)
 			return (0);
-		if (tmp -> next == NULL)
+		if (tmp -> next == NULL || tmp -> next == head)
 			break ;
 		tmp = tmp -> next;
 	}
