@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/12 15:55:46 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:09:56 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	return (0);
 }
+
 static int	make_stack(int argc, char **argv, t_stack **a)
 {
 	int		i;

@@ -21,11 +21,13 @@ int	check_lstrepetition(t_stack **lst, int number)
 	if (!*lst)
 		return (1);
 	head = *lst;
-	tmp = head -> next;
-	while (tmp && tmp != head)
+	tmp = head;
+	while (tmp)
 	{
 		if (tmp -> content[0] == number)
 			return (0);
+		if (tmp -> next == NULL)
+			break ;
 		tmp = tmp -> next;
 	}
 	return (1);
