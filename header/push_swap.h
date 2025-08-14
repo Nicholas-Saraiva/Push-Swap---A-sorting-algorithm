@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:32:39 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/12 16:04:03 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 13:00:21 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	lstadd_back(t_stack **lst, t_stack *new);
 int		check_lstrepetition(t_stack **lst, int number);
 
 //----------Utils
-int		ft_break_atoi(const char *split, int *number);
+int		ft_strtoi(const char *split, int *number);
 int 	*new_value(int value);
 int		get_size(char **split);
 int		ft_abs(const int number);

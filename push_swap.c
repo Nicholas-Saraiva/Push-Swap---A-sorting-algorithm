@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 12:09:56 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:59:55 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	fill_stack(char *split, t_stack **a)
 	t_stack 	*new;
 
 	number = 0;
-	if (!ft_break_atoi(split, &number))
+	if (!ft_strtoi(split, &number))
 		return (0);
 	if (!check_lstrepetition(a, number))
 		return (0);

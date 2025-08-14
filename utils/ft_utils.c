@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:05:50 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 12:55:58 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:59:36 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int *new_value(int value)
 	return (new_value);
 }
 
-int	ft_break_atoi(const char *split, int *number)
+int	ft_strtoi(const char *split, int *number)
 {
 	int		i;
 	int		sign;
