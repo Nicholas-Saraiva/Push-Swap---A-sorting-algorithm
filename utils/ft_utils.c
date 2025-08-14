@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:05:50 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/13 18:05:52 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:55:58 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,18 @@ int *new_value(int value)
 int	ft_break_atoi(const char *split, int *number)
 {
 	int		i;
+	int		sign;
 	long	new_number;
 
 	i = -1;
 	new_number = 0;
+	sign = 1;
+	if (*split == '+' || *split == '-')
+	{
+		if (*split == '-')
+			sign = -1;
+		split++;
+	}
 	while (split[++i] && (new_number >= INT_MIN || new_number <= INT_MAX))
 	{
 		if (split[i] < '0'  || split[i] > '9')
@@ -49,7 +57,7 @@ int	ft_break_atoi(const char *split, int *number)
 	}
 	if ((new_number < INT_MIN || new_number > INT_MAX))
 		return (0);
-	*number = (int) new_number;
+	*number = (int) (new_number * sign);
 	return (1);
 }
 
