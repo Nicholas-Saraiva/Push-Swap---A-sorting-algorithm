@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 12:59:55 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:22:30 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char *argv[])
 	a = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
+	ft_reverse_rotate(&a);
 	first = a;
 	while (a->next != first)
 	{

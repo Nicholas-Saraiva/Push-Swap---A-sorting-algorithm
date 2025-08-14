@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:32:39 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 13:00:21 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:22:51 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,10 @@ int		ft_strtoi(const char *split, int *number);
 int 	*new_value(int value);
 int		get_size(char **split);
 int		ft_abs(const int number);
+
+//----------srcs/operations
+void	ft_swap(t_stack **stack);
+void	ft_rotate(t_stack **stack);
+void	ft_reverse_rotate(t_stack **stack);
 
 #endif
