@@ -46,5 +46,6 @@ int		ft_abs(const int number);
 void	ft_swap(t_stack **stack);
 void	ft_rotate(t_stack **stack);
 void	ft_reverse_rotate(t_stack **stack);
+void	ft_push(t_stack **head1, t_stack **head2);
 
 #endif

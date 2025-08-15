@@ -24,17 +24,26 @@ int	main(int argc, char *argv[])
 	t_stack *first;
 
 	a = NULL;
+	b = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
-	ft_reverse_rotate(&a);
+	ft_push(&a, &b);
 	first = a;
 	while (a->next != first)
 	{
 		printf("%d\n", a->content[0]);
 		a = a->next;
 	}
-		printf("%d\n", a->content[0]);
+	printf("%d\n\n", a->content[0]);
 	lstclear(&a);
+	first = b;
+	while (b && b -> next && b->next != first)
+	{
+		printf("%d\n", b->content[0]);
+		b = b->next;
+	}
+	printf("%d\n\n", b->content[0]);
+	lstclear(&b);
 	if (argv[0])
 		return (0);
 	return (0);
