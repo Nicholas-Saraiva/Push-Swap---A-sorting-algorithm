@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_stack	*lstnew(int *content)
+t_stack	*lstnew(int content)
 {
 	t_stack	*node;
 
@@ -24,7 +24,7 @@ int	check_lstrepetition(t_stack **lst, int number)
 	tmp = head;
 	while (tmp)
 	{
-		if (tmp -> content[0] == number)
+		if (tmp -> content == number)
 			return (0);
 		if (tmp -> next == NULL || tmp -> next == head)
 			break ;
@@ -46,7 +46,6 @@ void lstclear(t_stack **lst)
     while (actual_pos != NULL)
     {
         tmp = actual_pos->next;
-        free(actual_pos->content);
         free(actual_pos);
         actual_pos = tmp;
 		if (actual_pos == head)

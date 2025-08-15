@@ -6,13 +6,11 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 17:22:30 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/15 12:40:29 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-#include <stdio.h>
 
 static int	fill_stack(char *split, t_stack **a);
 static int	make_stack(int argc, char **argv, t_stack **a);
@@ -27,22 +25,28 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
+	ft_rotate(&b);
+	ft_swap(&b);
+	ft_reverse_rotate(&b);
 	ft_push(&a, &b);
 	first = a;
 	while (a->next != first)
 	{
-		printf("%d\n", a->content[0]);
+		ft_printf("%d\n", a->content);
 		a = a->next;
 	}
-	printf("%d\n\n", a->content[0]);
+	ft_printf("%d\n\n", a->content);
 	lstclear(&a);
 	first = b;
+	ft_rotate(&b);
+	ft_swap(&b);
+	ft_reverse_rotate(&b);
 	while (b && b -> next && b->next != first)
 	{
-		printf("%d\n", b->content[0]);
+		ft_printf("%d\n", b->content);
 		b = b->next;
 	}
-	printf("%d\n\n", b->content[0]);
+	ft_printf("%d\n\n", b->content);
 	lstclear(&b);
 	if (argv[0])
 		return (0);
@@ -75,7 +79,6 @@ static int	make_stack(int argc, char **argv, t_stack **a)
 
 static int	fill_stack(char *split, t_stack **a)
 {
-	int 		*value;
 	int			number;
 	t_stack 	*new;
 
@@ -84,8 +87,7 @@ static int	fill_stack(char *split, t_stack **a)
 		return (0);
 	if (!check_lstrepetition(a, number))
 		return (0);
-	value = new_value(number);
-	new = lstnew(value);
+	new = lstnew(number);
 	lstadd_back(a, new);
 	if (!a)
 		return (0);

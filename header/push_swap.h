@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:32:39 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 17:22:51 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/15 12:39:29 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <stdlib.h>
 # include <limits.h>
 # include "libft.h"
+# include "ft_printf.h"
 
 typedef struct	s_stack
 {
-	int		*content;
+	int		content;
 	void	*next;
 	void	*previus;
 }	t_stack;
@@ -30,7 +31,7 @@ void	ft_error(t_stack **a, t_stack **b);
 void	free_char_array(char **array);
 
 //----------List-Utils
-t_stack	*lstnew(int *content);
+t_stack	*lstnew(int content);
 void	lstclear(t_stack **lst);
 void	lstadd_front(t_stack **lst, t_stack *new);
 void	lstadd_back(t_stack **lst, t_stack *new);
