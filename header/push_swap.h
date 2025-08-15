@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:32:39 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/15 12:39:29 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:06:59 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void	ft_swap(t_stack **stack);
 void	ft_rotate(t_stack **stack);
 void	ft_reverse_rotate(t_stack **stack);
 void	ft_push(t_stack **head1, t_stack **head2);
+
+//---------srcs/sort
+int		ft_is_sort(t_stack *stack);
+void	ft_tiny_sort(t_stack **stack);
 
 #endif

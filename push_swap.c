@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/15 12:40:29 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:46:08 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,15 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
-	ft_rotate(&b);
-	ft_swap(&b);
-	ft_reverse_rotate(&b);
-	ft_push(&a, &b);
+	ft_tiny_sort(&a);
+	//ft_reverse_rotate(&a);
 	first = a;
 	while (a->next != first)
 	{
 		ft_printf("%d\n", a->content);
 		a = a->next;
 	}
-	ft_printf("%d\n\n", a->content);
-	lstclear(&a);
-	first = b;
-	ft_rotate(&b);
-	ft_swap(&b);
-	ft_reverse_rotate(&b);
-	while (b && b -> next && b->next != first)
-	{
-		ft_printf("%d\n", b->content);
-		b = b->next;
-	}
-	ft_printf("%d\n\n", b->content);
-	lstclear(&b);
+		ft_printf("%d\n", a->content);
 	if (argv[0])
 		return (0);
 	return (0);

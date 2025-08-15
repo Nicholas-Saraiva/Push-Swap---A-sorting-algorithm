@@ -6,13 +6,14 @@
 #    By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 12:39:58 by nsaraiva          #+#    #+#              #
-#    Updated: 2025/08/15 12:45:27 by nsaraiva         ###   ########.fr        #
+#    Updated: 2025/08/15 16:04:39 by nsaraiva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = push_swap.c
 SRC += utils/ft_error.c utils/ft_lst_utils.c utils/ft_utils.c
 SRC += srcs/ft_operations.c
+SRC += srcs/sort/ft_sort.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = includes/libft 

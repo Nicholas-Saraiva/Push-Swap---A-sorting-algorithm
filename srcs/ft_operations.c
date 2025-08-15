@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 17:57:02 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:45:46 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_swap(t_stack **head)
 	t_stack	*old_head;
 	t_stack *tail;
 	t_stack *next;
+	t_stack *tmp;
 
 	if (!*head || (*head)-> next == NULL || (*head) -> previus == NULL)
 		return ;
@@ -24,11 +25,13 @@ void	ft_swap(t_stack **head)
 	tail = (*head) -> previus;
 	next = (*head) -> next;
 	(*head) = next;
+	tmp = (*head) -> next;
  	tail -> next = (*head);
 	(*head) -> previus = tail;
-	old_head -> next = (*head) -> next;
+	old_head -> next = tmp;
+	tmp -> previus = old_head;
 	(*head) -> next = old_head;
-	next -> previus = (*head);
+	old_head ->previus = (*head);
 }
 
 void ft_rotate(t_stack **head)
