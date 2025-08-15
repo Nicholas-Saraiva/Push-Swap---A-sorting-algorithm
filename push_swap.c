@@ -20,6 +20,7 @@ static int	make_stack(int argc, char **argv, t_stack **a);
 int	main(int argc, char *argv[])
 {
 	t_stack *a;
+	t_stack *b;
 	t_stack *first;
 
 	a = NULL;

@@ -80,12 +80,9 @@ void	lstadd_back(t_stack **lst, t_stack *new)
 {
 	t_stack	*next_node;
 	t_stack *first_pos;
-	int		i;
 
-	i = 0;
 	if (!*lst && new)
 	{
-		new->position = i;
 		*lst = new;
 		return ;
 	}
@@ -93,11 +90,10 @@ void	lstadd_back(t_stack **lst, t_stack *new)
 	first_pos = *lst;
 	if (!new)
 		return ;
-	while (++i && next_node -> next != first_pos && next_node -> next)
+	while (next_node -> next != first_pos && next_node -> next)
 		next_node = next_node -> next;
 	new -> next = first_pos;
 	new -> previus = next_node;
-	new -> position = i;
 	next_node -> next = new;
 	first_pos->previus = new;
 }
