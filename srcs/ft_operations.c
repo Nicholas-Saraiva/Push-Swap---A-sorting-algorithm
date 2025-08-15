@@ -48,14 +48,16 @@ void ft_reverse_rotate(t_stack **head)
 void	ft_push(t_stack **head1, t_stack **head2)
 {
 	t_stack	*old_head;
-	t_stack	*tail;
+	t_stack	*previus;
 	t_stack	*next;
 
-	if (!*head1)
+	if (!*head1 || (*head1) -> next == NULL || (*head1) -> previus == NULL)
 		return ;
 	old_head = *head1;
-	(*head1) -> previus -> next = (*head1) -> next;
-	(*head1) -> next -> previus = (*head1) -> previus;
+	previus = old_head -> previus;
+	next = old_head ->next;
+	previus -> next = (*head1) -> next;
+	next -> previus = (*head1) -> previus;
 	(*head1) = (*head1) -> next;
 	old_head -> next = NULL;
 	old_head -> previus = NULL;

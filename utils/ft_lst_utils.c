@@ -55,24 +55,25 @@ void lstclear(t_stack **lst)
     *lst = NULL;
 }
 
-void	lstadd_front(t_stack **lst, t_stack *new)
+void	lstadd_front(t_stack **lst, t_stack *new_head)
 {
-	t_stack	*tmp;
+	t_stack	*old_head;
+	t_stack *previus;
 
-	if (!*lst && new)
+	if (!*lst && new_head)
 	{
-		*lst = new;
+		*lst = new_head;
 		return ;
 	}
-	if (!new)
+	if (!new_head)
 		return ;
-	new -> next = *lst;
-	new -> previus = (*lst) -> previus;
-	tmp = (*tmp);
-	(*lst) = new;
-	tmp -> previus -> next = new;
-	(*lst) -> previus = new;
-	(*lst) = new;
+	previus = (*lst) -> previus;
+	old_head = (*lst);
+	new_head -> next = old_head;
+	new_head -> previus = previus;
+	(*lst) = new_head;
+	previus -> next = new_head;
+	old_head -> previus = new_head;
 }
 
 void	lstadd_back(t_stack **lst, t_stack *new)

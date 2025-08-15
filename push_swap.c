@@ -56,10 +56,10 @@ static int	make_stack(int argc, char **argv, t_stack **a)
 		while (split[++j])
 			if (!fill_stack(split[j], a))
 				return (free_char_array(split), ft_error(a, (t_stack **) NULL), 0);
+		if (i > 1 && j != 1)
+				return (free_char_array(split), ft_error(a, (t_stack **) NULL), 0);
 		free_char_array(split);
 	}
-	if (i == 2 && j == 1)
-		return (lstclear(a), 0);
 	return (1);
 }
 
