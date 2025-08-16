@@ -42,7 +42,7 @@ int		check_lstrepetition(t_stack **lst, int number);
 int		ft_strtoi(const char *split, int *number);
 int 	*new_value(int value);
 int		get_size(char **split);
-int		ft_abs(const int number);
+int		ft_max(const int a, const int b);
 int		lst_size(t_stack *lst);
 
 

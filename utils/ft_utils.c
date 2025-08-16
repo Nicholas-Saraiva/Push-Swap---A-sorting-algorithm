@@ -61,9 +61,10 @@ int	ft_strtoi(const char *split, int *number)
 	return (1);
 }
 
-int		ft_abs(const int number)
+int		ft_max(const int a, const int b)
 {
-	if (number < 0)
-		return (number * (-1));
-	return (number);
+	if (a > b)
+		return (a);
+	return (b);
 }
+

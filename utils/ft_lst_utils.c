@@ -29,7 +29,7 @@ int	lst_size(t_stack *lst)
 		if (lst == head)
 			return (i);
 	}
-	return (0);
+	return (i);
 }
 
 int	check_lstrepetition(t_stack **lst, int number)
@@ -86,6 +86,8 @@ void	lstadd_front(t_stack **lst, t_stack *new_head)
 	if (!new_head)
 		return ;
 	previus = (*lst) -> previus;
+	if (!previus)
+		previus = *lst;
 	old_head = (*lst);
 	new_head -> next = old_head;
 	new_head -> previus = previus;

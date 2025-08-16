@@ -23,6 +23,9 @@ void	turk_sort(t_stack **a, t_stack **b)
 	ft_push(a, b);
 	
 	fill_cost(a, b);
+	ft_rotate(b);
+	ft_push(a, b);
+	fill_cost(a, b);
 }
 
 static void	fill_cost(t_stack **a, t_stack **b)
@@ -59,11 +62,7 @@ int	make_cost(t_stack **a, t_stack *max, int position)
 	{
 		if ((*a)->content > tmp->content)
 		{
-			if (cost + max->cost > size_b)
-				cost = cost + max->cost - size_b;
-			else
-				cost = cost + max->cost;
-			return (create_cost(position, cost, size_a, size_b));
+			return (create_cost(position, cost + max->cost, size_a, size_b));
 		}
 		if (tmp -> next == max)
 			break;
@@ -75,33 +74,51 @@ int	make_cost(t_stack **a, t_stack *max, int position)
 
 int	create_cost(int	cost1, int cost2, int size_a, int size_b)
 {
-	if ((cost1 > size_a / 2 + 1 && cost2 > size_b / 2 + 1) || (
-		cost1 <= size_a / 2 + 1 && cost2 <= size_b / 2 + 1
-	))
+	int	reverse_rotate;
+
+	reverse_rotate = 0;
+	if (( (float) (size_a % 2) == 0 && cost1 >= size_a / 2) || (
+		cost1 >= size_a / 2 + 1))
+	{
+		cost1 = size_a - cost1;
+		reverse_rotate++;
+	}
+	if (cost2 >= size_b)
+		cost2 -= size_b;
+	if ((!(size_b % 2) && cost2 >= size_b / 2) || (
+		cost2 >= size_b / 2 + 1))
+		reverse_rotate++;
+	if (reverse_rotate == 2 || reverse_rotate == 0)
+	{	
 		if (cost1 == cost2)
-			return (cost2 - + 1);
+			return (cost2 + 1);
 		else
-			return (ft_abs(cost1 - cost2) + 1);
-	else
-		return (cost1 + cost2 + 1);
+			return (ft_max(cost1, cost2) + 1);
+	}
+	if (reverse_rotate == 1 && (!(size_a % 2) || !(size_b % 2)))
+		return (ft_max(cost1, cost2) + 1);
+	return (cost1 + cost2 + 1);
 }
 
 static t_stack	*lst_max_value(t_stack **stack)
 {
-	t_stack *head;
+	t_stack *tmp;
 	t_stack *max;
 	int		position;
 	
-	head =  (*stack);
-	max = head;
+	tmp =  (*stack);
+	max = tmp;
+	max -> cost = 0;
 	position = 0;
-	while ((*stack) && (*stack) -> next && (*stack) -> next != head)
+	while (tmp && tmp -> next && tmp -> next != *stack)
 	{
-		(*stack) = (*stack)->next;
+		tmp = tmp->next;
 		position++;
-		if (max->content < (*stack)->content)
-			max = (*stack);
+		if (max->content < tmp->content)
+		{
+			max = tmp;
+			max->cost = position;
+		}
 	}
-	max->cost = position;
 	return (max);
 }
