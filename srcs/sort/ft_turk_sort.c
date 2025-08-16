@@ -12,52 +12,96 @@
 
 #include "push_swap.h"
 
-static t_stack	*return_max_value(t_stack *stack);
-static void	fill_cost(t_stack **a, t_stack **b);
+static t_stack	*lst_max_value(t_stack **stack);
+static void		fill_cost(t_stack **a, t_stack **b);
+int				make_cost(t_stack **a, t_stack *max, int position);
+int				create_cost(int	cost1, int cost2, int size_a, int size_b);
 
 void	turk_sort(t_stack **a, t_stack **b)
 {
-	t_stack	*max;
-
 	ft_push(a, b);
 	ft_push(a, b);
-	max = return_max_value(t_stack *b);
-
 	
+	fill_cost(a, b);
 }
 
 static void	fill_cost(t_stack **a, t_stack **b)
 {
-	t_stack	*max;
-	t_stack	*head;
+	t_stack	*tmp;
+	t_stack *max;
 	int		i;
 
-	head = a;
-	max = return_max_value(t_stack *b);
-	// if a.content > max.content, how much steps max.content will have to make to be on top.
-	// if not, check with outher's values on stack. If a.content is the minimun, just push.
-	while (a->next != head)
+	tmp = *a;
+	max = lst_max_value(b);
+	i = 0;
+	while (tmp)
 	{
-		if (a->content > max->content)
-		{
-			
-		}
+		tmp->cost = make_cost(&tmp, max, i);
+		tmp = tmp -> next;
+		if (tmp == *a)
+			break;
+		i++;
 	}
 }
 
-static t_stack	*return_max_value(t_stack *stack)
+int	make_cost(t_stack **a, t_stack *max, int position)
+{
+	t_stack *tmp;
+	int		cost;
+	int		size_a;
+	int		size_b;
+	
+	cost = 0;
+	tmp = max;
+	size_a = lst_size(*a);
+	size_b = lst_size(max);
+	while (tmp)
+	{
+		if ((*a)->content > tmp->content)
+		{
+			if (cost + max->cost > size_b)
+				cost = cost + max->cost - size_b;
+			else
+				cost = cost + max->cost;
+			return (create_cost(position, cost, size_a, size_b));
+		}
+		if (tmp -> next == max)
+			break;
+		tmp = tmp -> next;
+		cost++;
+	}
+	return (create_cost(position, max->cost, size_a, size_b));
+}
+
+int	create_cost(int	cost1, int cost2, int size_a, int size_b)
+{
+	if ((cost1 > size_a / 2 + 1 && cost2 > size_b / 2 + 1) || (
+		cost1 <= size_a / 2 + 1 && cost2 <= size_b / 2 + 1
+	))
+		if (cost1 == cost2)
+			return (cost2 - + 1);
+		else
+			return (ft_abs(cost1 - cost2) + 1);
+	else
+		return (cost1 + cost2 + 1);
+}
+
+static t_stack	*lst_max_value(t_stack **stack)
 {
 	t_stack *head;
-	t_stack *next;
 	t_stack *max;
+	int		position;
 	
-	head =  stack;
+	head =  (*stack);
 	max = head;
-	while (stack && stack -> next && stack -> next != head)
+	position = 0;
+	while ((*stack) && (*stack) -> next && (*stack) -> next != head)
 	{
-		stack = stack->next;
-		if (max->content < stack->content)
-			max = stack;
+		(*stack) = (*stack)->next;
+		position++;
+		if (max->content < (*stack)->content)
+			max = (*stack);
 	}
+	max->cost = position;
 	return (max);
 }

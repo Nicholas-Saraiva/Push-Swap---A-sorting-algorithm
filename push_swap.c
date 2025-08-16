@@ -26,11 +26,12 @@ int	main(int argc, char *argv[])
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
 	ft_tiny_sort(&a);
+	turk_sort(&a, &b);
 	//ft_reverse_rotate(&a);
 	first = a;
 	while (a->next != first)
 	{
-		ft_printf("%d\n", a->content);
+		ft_printf("Number: %d				Cost: %d\n", a->content, a->cost);
 		a = a->next;
 	}
 		ft_printf("%d\n", a->content);

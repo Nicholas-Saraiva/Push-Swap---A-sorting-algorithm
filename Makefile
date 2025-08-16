@@ -13,7 +13,7 @@
 SRC = push_swap.c
 SRC += utils/ft_error.c utils/ft_lst_utils.c utils/ft_utils.c
 SRC += srcs/ft_operations.c
-SRC += srcs/sort/ft_sort.c
+SRC += srcs/sort/ft_sort.c srcs/sort/ft_turk_sort.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = includes/libft 

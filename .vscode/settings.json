@@ -60,6 +60,9 @@
     "limits.h": "c",
     "stdlib.h": "c",
     "libft.h": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "random": "c",
+    "chrono": "c",
+    "limits": "c"
   }
 }

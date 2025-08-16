@@ -22,6 +22,7 @@
 typedef struct	s_stack
 {
 	int		content;
+	int		cost;
 	void	*next;
 	void	*previus;
 }	t_stack;
@@ -42,6 +43,8 @@ int		ft_strtoi(const char *split, int *number);
 int 	*new_value(int value);
 int		get_size(char **split);
 int		ft_abs(const int number);
+int		lst_size(t_stack *lst);
+
 
 //----------srcs/operations
 void	ft_swap(t_stack **stack);
@@ -52,5 +55,6 @@ void	ft_push(t_stack **head1, t_stack **head2);
 //---------srcs/sort
 int		ft_is_sort(t_stack *stack);
 void	ft_tiny_sort(t_stack **stack);
+void	turk_sort(t_stack **a, t_stack **b);
 
 #endif
