@@ -19,13 +19,15 @@ int				create_cost(int	cost1, int cost2, int size_a, int size_b);
 
 void	turk_sort(t_stack **a, t_stack **b)
 {
+	int	size;
+
+	size = lst_size(a) + 1;
 	ft_push(a, b);
 	ft_push(a, b);
-	
-	fill_cost(a, b);
-	ft_rotate(b);
-	ft_push(a, b);
-	fill_cost(a, b);
+	while (--size > 3)
+	{
+		fill_cost(a, b);
+	}
 }
 
 static void	fill_cost(t_stack **a, t_stack **b)
