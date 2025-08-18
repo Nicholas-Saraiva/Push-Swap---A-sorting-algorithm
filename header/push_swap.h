@@ -27,6 +27,13 @@ typedef struct	s_stack
 	void	*previus;
 }	t_stack;
 
+typedef struct s_positions
+{
+	int	position_a;
+	int	position_b;
+}	t_positions;
+
+
 //----------Error-Utils
 void	ft_error(t_stack **a, t_stack **b);
 void	free_char_array(char **array);
@@ -46,11 +53,16 @@ int		ft_max(const int a, const int b);
 int		lst_size(t_stack *lst);
 
 
-//----------srcs/operations
+//----------srcs/operations/single
 void	ft_swap(t_stack **stack);
 void	ft_rotate(t_stack **stack);
 void	ft_reverse_rotate(t_stack **stack);
 void	ft_push(t_stack **head1, t_stack **head2);
+
+//----------srcs/operations/dual
+void    ft_ss(t_stack **a, t_stack **b);
+void    ft_rr(t_stack **a, t_stack **b);
+void    ft_rrr(t_stack **a, t_stack **b);
 
 //---------srcs/sort
 int		ft_is_sort(t_stack *stack);

@@ -63,6 +63,11 @@
     "cstdlib": "c",
     "random": "c",
     "chrono": "c",
-    "limits": "c"
+    "limits": "c",
+    "array": "c",
+    "string_view": "c",
+    "format": "c",
+    "initializer_list": "c",
+    "span": "c"
   }
 }

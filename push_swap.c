@@ -19,7 +19,6 @@ int	main(int argc, char *argv[])
 {
 	t_stack *a;
 	t_stack *b;
-	t_stack *first;
 
 	a = NULL;
 	b = NULL;
@@ -28,13 +27,6 @@ int	main(int argc, char *argv[])
 	//ft_tiny_sort(&a);
 	turk_sort(&a, &b);
 	//ft_reverse_rotate(&a);
-	first = a;
-	while (a->next != first)
-	{
-		ft_printf("Number: %d				Cost: %d\n", a->content, a->cost);
-		a = a->next;
-	}
-		ft_printf("Number: %d				Cost: %d\n", a->content, a->cost);
 	if (argv[0])
 		return (0);
 	return (0);
