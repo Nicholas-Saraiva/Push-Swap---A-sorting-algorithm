@@ -9,8 +9,8 @@
       "args": ["5 2 7 1 6 3 9 4 8"],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/alexandria/library/42Cursos/push_swap",
-      "program": "/home/alexandria/library/42Cursos/push_swap/push_swap",
+      "cwd": "/home/nsaraiva/library/push_swap",
+      "program": "/home/nsaraiva/library/push_swap/push_swap",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

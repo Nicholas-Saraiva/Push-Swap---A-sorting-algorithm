@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:02:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/15 18:51:25 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:50:56 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 static t_positions	get_positions(t_stack **a, t_stack **b, 
 	t_stack *less_cost, t_stack *max_b);
 int	before_middle(int size, int position);
-
+static void	modify_stacks_b(t_stack **a, t_stack **b, 
+	t_stack *less_cost, t_stack *max_b);
+	
 void	turk_sort(t_stack **a, t_stack **b)
 {
-	t_stack *a1;
-	t_stack *first;
 	int	size;
 	t_stack *max_b;
 	t_stack *less_cost;
@@ -44,36 +44,54 @@ void	turk_sort(t_stack **a, t_stack **b)
 	}
 	size = lst_size(*b) + 1;
 	ft_tiny_sort(a);
-	int	i = 0;
-	while (--size)
+	
+	while (*b)
+		modify_stacks_b(a, b, lst_max_value(a), *b);
+}
+
+t_stack	*get_great_small(t_stack *less_cost, t_stack *a)
+{
+	t_stack	*tmp;
+	t_stack *max;
+
+	tmp = a;
+	max = tmp;
+	while (less_cost->content < tmp->content)
 	{
-		a1 = *a;
-		first = a1;
-		i = 0;
-		if (a1->previus && (*b)->content < ((t_stack*)a1->previus)->content)
-			
-		while ((*b)->content > a1->content)
+		tmp = tmp->previus;
+		if (tmp == max)
 		{
-			a1 = a1->next;
-			if (a1 == first)
-				break;
-			i++;
-		}
-		if (i == 0)
-			ft_push(b, a);
-		int	cost = i - 1;
-		if (i >= lst_size(*a))
-			cost -= size;
-		while (--cost >= 0)
-		{
-			if (before_middle(size, i))
-				ft_rotate(a);
-			else
-				ft_reverse_rotate(a);
-		}
-		ft_push(b, a);
+			tmp = tmp ->next;
+			break;
+		}	
 	}
-	ft_printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+	if (less_cost->content > tmp->content)
+		tmp = tmp -> next;
+	return (tmp);
+}
+
+static void	modify_stacks_b(t_stack **a, t_stack **b, 
+	t_stack *less_cost, t_stack *max_b)
+{
+	t_positions	pos;
+	int			size_a;
+	int			size_b;
+
+	size_a = lst_size(*a);
+	size_b = lst_size(*b);
+	less_cost = get_great_small(max_b, less_cost);
+	pos = get_positions(a, b, less_cost, max_b);
+	while (before_middle(size_a, pos.position_a) && *a != less_cost)
+	{
+		ft_rotate(a);
+		pos.position_a++;
+	}
+	while (!before_middle(size_a, pos.position_a) && *a != less_cost)
+	{
+		ft_reverse_rotate(a);
+		pos.position_a--;
+	}
+	ft_push(b, a);
 }
 
 int	before_middle(int size, int position)
@@ -113,38 +131,32 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 		size_a, pos.position_a) && before_middle(size_b, pos.position_b))
 	{
 		ft_rr(a, b);
-		less_cost->cost--;
 		pos.position_a++;
 	}
 	while ((!(size_a - pos.position_a) || !(size_b - pos.position_b)) && !before_middle(
 		size_a, pos.position_a) && !before_middle(size_b, pos.position_b))
 	{
 		ft_rrr(a,b);
-		less_cost->cost--;
 		pos.position_b--;
 	}	
 	while (before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
 		ft_rotate(a);
-		less_cost->cost--;
 		pos.position_a++;
 	}
 	while (before_middle(size_b, pos.position_b) && *b != max_b)
 	{
 		ft_rotate(b);
-		less_cost->cost--;
 		pos.position_b++;
 	}
 	while (!before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
 		ft_reverse_rotate(a);
-		less_cost->cost--;
 		pos.position_a--;
 	}
 	while (!before_middle(size_b, pos.position_b) && *b != max_b)
 	{
 		ft_reverse_rotate(b);
-		less_cost->cost--;
 		pos.position_b--;
 	}
 	ft_push(a,b);
@@ -225,9 +237,7 @@ int	make_cost(t_stack **a, t_stack *max, int position)
 	while (tmp)
 	{
 		if ((*a)->content > tmp->content)
-		{
 			return (create_cost(position, cost + max->cost, size_a, size_b));
-		}
 		if (tmp -> next == max)
 			break;
 		tmp = tmp -> next;
@@ -255,11 +265,9 @@ int	create_cost(int	cost1, int cost2, int size_a, int size_b)
 		cost2 = size_b - cost2;
 		reverse_rotate++;
 	}
-	if (reverse_rotate == 2 || reverse_rotate == 0)
-		return (ft_max(cost1, cost2) + 1);
-	if ((cost2 && cost1 >= size_b) || (cost1 && cost2 >= size_a))
-		return (ft_max(cost1, cost2) + 1);
-	if (reverse_rotate == 1 && (cost2 == size_b / 2 ||  cost1 == size_a / 2))
+	if ((reverse_rotate == 2 || reverse_rotate == 0) || (
+		(cost2 && cost1 >= size_b) || (cost1 && cost2 >= size_a)) || (
+		reverse_rotate == 1 && (cost2 == size_b / 2 ||  cost1 == size_a / 2)))
 		return (ft_max(cost1, cost2) + 1);
 	return (cost1 + cost2 + 1);
 }

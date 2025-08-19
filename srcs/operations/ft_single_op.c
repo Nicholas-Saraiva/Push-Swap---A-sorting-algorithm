@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/17 10:02:23 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:01:31 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,14 @@ void	ft_push(t_stack **head1, t_stack **head2)
 	t_stack	*previus;
 	t_stack	*next;
 
-	if (!*head1 || (*head1) -> next == NULL || (*head1) -> previus == NULL)
+	if (!*head1)
 		return ;
+	if ((*head1) -> next == NULL)
+	{
+		lstadd_front(head2, (*head1));
+		(*head1) = NULL;
+		return ;
+	}
 	old_head = *head1;
 	previus = old_head -> previus;
 	next = old_head ->next;
@@ -64,6 +70,11 @@ void	ft_push(t_stack **head1, t_stack **head2)
 	(*head1) = (*head1) -> next;
 	old_head -> next = NULL;
 	old_head -> previus = NULL;
+	if (previus == next)
+	{
+		(*head1)->next = NULL;
+		(*head1)->previus = NULL;
+	}
 	lstadd_front(head2, old_head);
 }
 
