@@ -19,6 +19,9 @@ int	main(int argc, char *argv[])
 {
 	t_stack *a;
 	t_stack *b;
+	t_stack *a1;
+	t_stack *b1;
+	t_stack *first;
 
 	a = NULL;
 	b = NULL;
@@ -26,6 +29,26 @@ int	main(int argc, char *argv[])
 		return (0);
 	//ft_tiny_sort(&a);
 	turk_sort(&a, &b);
+	ft_printf("\nSTACK A\n");
+	a1 = a;
+	first = a1;
+	while (a1->next != first)
+	{
+		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
+		a1 = a1->next;
+	}
+		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
+	ft_printf("\nSTACK B\n");
+		b1 = (b);
+
+	first = b1;
+	while (b1->next != first)
+	{
+		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
+		b1 = b1->next;
+	}
+		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
+
 	//ft_reverse_rotate(&a);
 	if (argv[0])
 		return (0);

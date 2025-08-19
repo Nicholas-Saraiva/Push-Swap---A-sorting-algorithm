@@ -21,11 +21,11 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 	t_stack *less_cost, t_stack *max_b);
 static t_positions	get_positions(t_stack **a, t_stack **b, 
 	t_stack *less_cost, t_stack *max_b);
+int	before_middle(int size, int position);
 
 void	turk_sort(t_stack **a, t_stack **b)
 {
 	t_stack *a1;
-	t_stack *b1;
 	t_stack *first;
 	int	size;
 	t_stack *max_b;
@@ -37,29 +37,41 @@ void	turk_sort(t_stack **a, t_stack **b)
 	max_b = lst_max_value(b);
 	while (--size > 3)
 	{ 
-
 		fill_cost(a, max_b);
 		less_cost = find_less_cost(a);
 		modify_stacks(a, b, less_cost, max_b);
 		max_b = lst_max_value(b);
-		a1 = (*a);
+	}
+	size = lst_size(*b) + 1;
+	ft_tiny_sort(a);
+	int	i = 0;
+	while (--size)
+	{
+		a1 = *a;
 		first = a1;
-		b1 = (*b);
-	ft_printf("\nSTACK A\n");
-	while (a1->next != first)
-	{
-		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
-		a1 = a1->next;
-	}
-		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
-	ft_printf("\nSTACK B\n");
-	first = b1;
-	while (b1->next != first)
-	{
-		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
-		b1 = b1->next;
-	}
-		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
+		i = 0;
+		if (a1->previus && (*b)->content < ((t_stack*)a1->previus)->content)
+			
+		while ((*b)->content > a1->content)
+		{
+			a1 = a1->next;
+			if (a1 == first)
+				break;
+			i++;
+		}
+		if (i == 0)
+			ft_push(b, a);
+		int	cost = i - 1;
+		if (i >= lst_size(*a))
+			cost -= size;
+		while (--cost >= 0)
+		{
+			if (before_middle(size, i))
+				ft_rotate(a);
+			else
+				ft_reverse_rotate(a);
+		}
+		ft_push(b, a);
 	}
 	ft_printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 }
@@ -226,29 +238,29 @@ int	make_cost(t_stack **a, t_stack *max, int position)
 
 int	create_cost(int	cost1, int cost2, int size_a, int size_b)
 {
-	int	dual_rotate;
+	int	reverse_rotate;
 
-	dual_rotate = 0;
-	if ((!(size_a % 2) && cost1 >= size_a / 2) || (
+	reverse_rotate = 0;
+	if ((!(size_a % 2) && cost1 > size_a / 2) || (
 		cost1 >= size_a / 2 + 1))
 	{
 		cost1 = size_a - cost1;
-		dual_rotate++;
+		reverse_rotate++;
 	}
-	if (cost2 >= size_b)
+	if (cost2 > size_b)
 		cost2 -= size_b;
-	if ((!(size_b % 2) && cost2 >= size_b / 2) || (
+	if ((!(size_b % 2) && cost2 > size_b / 2) || (
 		cost2 >= size_b / 2 + 1))
-		dual_rotate++;
-	if (dual_rotate == 2 || dual_rotate == 0)
-	{	
-		if (cost1 == cost2)
-			return (cost2 + 1);
-		else
-			return (ft_max(cost1, cost2) + 1);
+	{
+		cost2 = size_b - cost2;
+		reverse_rotate++;
 	}
-	// if (dual_rotate == 1 && (!(size_a % 2) || !(size_b % 2)))
-	// 	return (ft_max(cost1, cost2) + 1);
+	if (reverse_rotate == 2 || reverse_rotate == 0)
+		return (ft_max(cost1, cost2) + 1);
+	if ((cost2 && cost1 >= size_b) || (cost1 && cost2 >= size_a))
+		return (ft_max(cost1, cost2) + 1);
+	if (reverse_rotate == 1 && (cost2 == size_b / 2 ||  cost1 == size_a / 2))
+		return (ft_max(cost1, cost2) + 1);
 	return (cost1 + cost2 + 1);
 }
 
@@ -260,6 +272,7 @@ static t_stack	*lst_max_value(t_stack **stack)
 	
 	tmp =  (*stack);
 	max = tmp;
+	max->cost = 0;
 	position = 0;
 	while (tmp && tmp -> next && tmp -> next != *stack)
 	{

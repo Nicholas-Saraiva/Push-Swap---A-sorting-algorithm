@@ -5,6 +5,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
+      //"args": ["0 4 6 12 8 3 5 1 9 10 20 30"],
       "args": ["5 2 7 1 6 3 9 4 8"],
       "stopAtEntry": false,
       "externalConsole": false,
