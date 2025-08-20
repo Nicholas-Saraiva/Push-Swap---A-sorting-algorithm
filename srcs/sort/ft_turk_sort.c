@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:02:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/19 18:50:56 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:18 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	turk_sort(t_stack **a, t_stack **b)
 	t_stack *max_b;
 	t_stack *less_cost;
 
-	ft_push(a, b);
-	ft_push(a, b);
+	ft_push(a, b, 'b');
+	ft_push(a, b, 'b');
 	size = lst_size(*a) + 1;
 	max_b = lst_max_value(b);
 	while (--size > 3)
@@ -44,9 +44,19 @@ void	turk_sort(t_stack **a, t_stack **b)
 	}
 	size = lst_size(*b) + 1;
 	ft_tiny_sort(a);
-	
 	while (*b)
 		modify_stacks_b(a, b, lst_max_value(a), *b);
+	max_b = lst_max_value(a);
+	max_b->cost += 1;
+	
+	size = lst_size(*a) + 1;
+	if ((!(size % 2) && max_b->cost < size / 2) || ( 
+		max_b->cost < size / 2 + 1))
+		while ((*a) != max_b->next)
+			ft_rotate(a, 'a');
+	else
+		while ((*a) != max_b->next)
+			ft_reverse_rotate(a, 'a');
 }
 
 t_stack	*get_great_small(t_stack *less_cost, t_stack *a)
@@ -83,15 +93,15 @@ static void	modify_stacks_b(t_stack **a, t_stack **b,
 	pos = get_positions(a, b, less_cost, max_b);
 	while (before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
-		ft_rotate(a);
+		ft_rotate(a, 'a');
 		pos.position_a++;
 	}
 	while (!before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
-		ft_reverse_rotate(a);
+		ft_reverse_rotate(a, 'a');
 		pos.position_a--;
 	}
-	ft_push(b, a);
+	ft_push(b, a, 'a');
 }
 
 int	before_middle(int size, int position)
@@ -141,25 +151,25 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 	}	
 	while (before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
-		ft_rotate(a);
+		ft_rotate(a, 'a');
 		pos.position_a++;
 	}
 	while (before_middle(size_b, pos.position_b) && *b != max_b)
 	{
-		ft_rotate(b);
+		ft_rotate(b, 'b');
 		pos.position_b++;
 	}
 	while (!before_middle(size_a, pos.position_a) && *a != less_cost)
 	{
-		ft_reverse_rotate(a);
+		ft_reverse_rotate(a, 'a');
 		pos.position_a--;
 	}
 	while (!before_middle(size_b, pos.position_b) && *b != max_b)
 	{
-		ft_reverse_rotate(b);
+		ft_reverse_rotate(b, 'b');
 		pos.position_b--;
 	}
-	ft_push(a,b);
+	ft_push(a,b, 'b');
 }
 
 static t_positions	get_positions(t_stack **a, t_stack **b, 

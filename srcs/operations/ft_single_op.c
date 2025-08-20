@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/19 19:01:31 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:46:55 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,28 @@ void	ft_swap(t_stack **head)
 	tmp -> previus = old_head;
 	(*head) -> next = old_head;
 	old_head ->previus = (*head);
+	ft_printf("sa\n");
 }
 
-void ft_rotate(t_stack **head)
+void ft_rotate(t_stack **head, char c)
 {
 	if (!*head || (*head) -> next == NULL || (*head) -> previus == NULL)
 		return ;
 	*head = (*head) -> next;
+	if (c)
+		ft_printf("r%c\n", c);
 }
 
-void ft_reverse_rotate(t_stack **head)
+void ft_reverse_rotate(t_stack **head, char c)
 {
 	if (!*head || (*head) -> next == NULL || (*head) -> previus == NULL)
 		return ;
 	*head = (*head) -> previus;
+	if (c)
+		ft_printf("rr%c\n", c);
 }
 
-void	ft_push(t_stack **head1, t_stack **head2)
+void	ft_push(t_stack **head1, t_stack **head2, char c)
 {
 	t_stack	*old_head;
 	t_stack	*previus;
@@ -60,6 +65,8 @@ void	ft_push(t_stack **head1, t_stack **head2)
 	{
 		lstadd_front(head2, (*head1));
 		(*head1) = NULL;
+		if (c)
+			ft_printf("p%c\n", c);
 		return ;
 	}
 	old_head = *head1;
@@ -76,5 +83,7 @@ void	ft_push(t_stack **head1, t_stack **head2)
 		(*head1)->previus = NULL;
 	}
 	lstadd_front(head2, old_head);
+	if (c)
+		ft_printf("p%c\n", c);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/15 16:46:08 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:58:06 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,27 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
-	//ft_tiny_sort(&a);
 	turk_sort(&a, &b);
 	ft_printf("\nSTACK A\n");
-	a1 = a;
-	first = a1;
-	while (a1->next != first)
-	{
-		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
-		a1 = a1->next;
-	}
-		ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
-	ft_printf("\nSTACK B\n");
-		b1 = (b);
-
-	first = b1;
-	while (b1->next != first)
-	{
-		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
-		b1 = b1->next;
-	}
-		ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
-
-	//ft_reverse_rotate(&a);
+	//a1 = a;
+	//first = a1;
+	//while (a1)
+	//{
+	//	ft_printf("Number: %d				Cost: %d\n", a1->content, a1->cost);
+	//	a1 = a1->next;
+	//	if (a1 == first)
+	//		break ;
+	//}
+	//ft_printf("\nSTACK B\n");
+	//b1 = (b);
+	//first = b1;
+	//while (b1)
+	//{
+	//	ft_printf("Number: %d				Cost: %d\n", b1->content, b1->cost);
+	//	b1 = b1->next;
+	//	if (b1 == first)
+	//		break ;
+	//}
 	if (argv[0])
 		return (0);
 	return (0);

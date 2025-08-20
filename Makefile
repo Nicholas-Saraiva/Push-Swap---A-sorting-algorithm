@@ -6,7 +6,7 @@
 #    By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 12:39:58 by nsaraiva          #+#    #+#              #
-#    Updated: 2025/08/15 16:04:39 by nsaraiva         ###   ########.fr        #
+#    Updated: 2025/08/20 14:49:35 by nsaraiva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = $(SRC:.c=.o)
 LIBFT = includes/libft 
 LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
 PRINTF = includes/ft_printf
-PRINTF_A = $(addprefix $(LIBFT)/, ft_printf.a)
+PRINTF_A = $(addprefix $(PRINTF)/, ft_printf.a)
 
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror -Iheader -g
@@ -32,24 +32,23 @@ $(NAME): $(OBJ)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBRARIES) -o $(NAME)
 
 $(LIBFT_A):
-	make -C $(LIBFT)
+	$(MAKE) -C $(LIBFT) all
 $(PRINTF_A):
-	make -C $(PRINTF)
+	$(MAKE) -C $(PRINTF) all
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ)
-	make clean -C $(LIBFT)
-	make clean -C $(PRINTF)
+	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(PRINTF) clean
 
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -C $(LIBFT)
-	make fclean -C $(PRINTF)
+	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(PRINTF) fclean
 
 re: fclean all
 
 .PHONY: all clean fclean re
-

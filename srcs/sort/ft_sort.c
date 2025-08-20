@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 12:35:26 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/15 16:59:05 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:40:35 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ int	ft_is_sort(t_stack *stack)
 void	ft_tiny_sort(t_stack **stack)
 {
 	t_stack *next;
+	t_stack *previus;
 
 	if (ft_is_sort(*stack))
 		return ;
 	next = (*stack) -> next;
+	previus = (*stack)->previus;
 	if (worst_case(stack))
 		return ;
-	if ((*stack)->content > next->content)
-		ft_swap(stack);
+	if ((*stack)->content > previus->content)
+		ft_rotate(stack, 'a');
 	else
-		ft_reverse_rotate(stack);
+		ft_swap(stack);
 }
 
 static int	worst_case(t_stack **stack)
@@ -56,15 +58,15 @@ static int	worst_case(t_stack **stack)
 				next->content > previus->content))
 	{
 		ft_swap(stack);
-		ft_reverse_rotate(stack);
+		ft_reverse_rotate(stack, 'a');
 		return (1);
 	}
-	if (((*stack)->content < next->content) && (
+	if ((((*stack)->content < next->content) && (
 				next->content > previus->content) && (
-					previus->content > (*stack)->content))
+				previus->content > (*stack)->content)))
 	{
 		ft_swap(stack);
-		ft_rotate(stack);
+		ft_rotate(stack, 'a');
 		return (1);
 	}
 	return (0);
