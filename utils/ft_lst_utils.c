@@ -32,26 +32,6 @@ int	lst_size(t_stack *lst)
 	return (i);
 }
 
-int	check_lstrepetition(t_stack **lst, int number)
-{
-	t_stack *tmp;
-	t_stack *head;
-
-	if (!*lst)
-		return (1);
-	head = *lst;
-	tmp = head;
-	while (tmp)
-	{
-		if (tmp -> content == number)
-			return (0);
-		if (tmp -> next == NULL || tmp -> next == head)
-			break ;
-		tmp = tmp -> next;
-	}
-	return (1);
-}
-
 void lstclear(t_stack **lst)
 {
     t_stack *actual_pos;

@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
- # include "push_swap.h"
+#include "push_swap.h"
 
 static int	worst_case(t_stack **stack);
 
 int	ft_is_sort(t_stack *stack)
 {
-	t_stack *head;
-	t_stack *next;
+	t_stack	*head;
+	t_stack	*next;
 
 	head = stack;
 	while (stack && stack -> next && stack -> next != head)
@@ -32,16 +32,19 @@ int	ft_is_sort(t_stack *stack)
 
 void	ft_tiny_sort(t_stack **stack)
 {
-	t_stack *next;
-	t_stack *previus;
+	t_stack	*previus;
+	t_stack	*next;
 
 	if (ft_is_sort(*stack))
 		return ;
-	next = (*stack) -> next;
+	next = (*stack)->next;
 	previus = (*stack)->previus;
 	if (worst_case(stack))
 		return ;
-	if ((*stack)->content > previus->content)
+	if (next->content > previus->content && next->content > (*stack)->content)
+		ft_reverse_rotate(stack, 'a');
+	else if ((*stack)->content > next->content && (
+			*stack)->content > previus->content)
 		ft_rotate(stack, 'a');
 	else
 		ft_swap(stack);
@@ -52,10 +55,10 @@ static int	worst_case(t_stack **stack)
 	t_stack	*next;
 	t_stack	*previus;
 
-	next = (*stack) -> next;
-	previus = (*stack) -> previus;
+	next = (*stack)->next;
+	previus = (*stack)->previus;
 	if (((*stack)->content > next->content) && (
-				next->content > previus->content))
+			next->content > previus->content))
 	{
 		ft_swap(stack);
 		ft_reverse_rotate(stack, 'a');

@@ -15,9 +15,9 @@
 void	ft_swap(t_stack **head)
 {
 	t_stack	*old_head;
-	t_stack *tail;
-	t_stack *next;
-	t_stack *tmp;
+	t_stack	*tail;
+	t_stack	*next;
+	t_stack	*tmp;
 
 	if (!*head || (*head)-> next == NULL || (*head) -> previus == NULL)
 		return ;

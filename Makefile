@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 SRC = push_swap.c
-SRC += utils/ft_error.c utils/ft_lst_utils.c utils/ft_utils.c
+SRC += utils/ft_error.c utils/ft_lst_utils.c utils/ft_more_lst_utils.c utils/ft_utils.c
 SRC += srcs/operations/ft_single_op.c srcs/operations/ft_dual_op.c
-SRC += srcs/sort/ft_sort.c srcs/sort/ft_turk_sort.c
+SRC += srcs/sort/ft_sort.c srcs/sort/ft_turk_sort.c srcs/sort/turk_cost_utils.c srcs/sort/turk_utils.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = includes/libft 
