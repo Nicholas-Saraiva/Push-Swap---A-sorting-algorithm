@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:00:49 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/12 18:56:57 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:15:25 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_error(t_stack **a, t_stack **b)
 		lstclear(a);
 	if (b)
 		lstclear(b);
-	ft_putstr_fd("ERROR\n", 2);
+	write(2, "Error\n", 6);
 	exit(-1);
 }
 

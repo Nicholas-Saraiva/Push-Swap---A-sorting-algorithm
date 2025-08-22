@@ -6,11 +6,13 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/20 15:46:55 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 12:10:48 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	is_one_elem(t_stack **head1, t_stack **head2, char c);
 
 void	ft_swap(t_stack **head)
 {
@@ -19,36 +21,36 @@ void	ft_swap(t_stack **head)
 	t_stack	*next;
 	t_stack	*tmp;
 
-	if (!*head || (*head)-> next == NULL || (*head) -> previus == NULL)
+	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
 		return ;
 	old_head = *head;
-	tail = (*head) -> previus;
-	next = (*head) -> next;
+	tail = (*head)->previus;
+	next = (*head)->next;
 	(*head) = next;
-	tmp = (*head) -> next;
- 	tail -> next = (*head);
-	(*head) -> previus = tail;
-	old_head -> next = tmp;
-	tmp -> previus = old_head;
-	(*head) -> next = old_head;
-	old_head ->previus = (*head);
+	tmp = (*head)->next;
+	tail->next = (*head);
+	(*head)->previus = tail;
+	old_head->next = tmp;
+	tmp->previus = old_head;
+	(*head)->next = old_head;
+	old_head->previus = (*head);
 	ft_printf("sa\n");
 }
 
-void ft_rotate(t_stack **head, char c)
+void	ft_rotate(t_stack **head, char c)
 {
-	if (!*head || (*head) -> next == NULL || (*head) -> previus == NULL)
+	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
 		return ;
-	*head = (*head) -> next;
+	*head = (*head)->next;
 	if (c)
 		ft_printf("r%c\n", c);
 }
 
-void ft_reverse_rotate(t_stack **head, char c)
+void	ft_reverse_rotate(t_stack **head, char c)
 {
-	if (!*head || (*head) -> next == NULL || (*head) -> previus == NULL)
+	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
 		return ;
-	*head = (*head) -> previus;
+	*head = (*head)->previus;
 	if (c)
 		ft_printf("rr%c\n", c);
 }
@@ -59,24 +61,16 @@ void	ft_push(t_stack **head1, t_stack **head2, char c)
 	t_stack	*previus;
 	t_stack	*next;
 
-	if (!*head1)
+	if (is_one_elem(head1, head2, c))
 		return ;
-	if ((*head1) -> next == NULL)
-	{
-		lstadd_front(head2, (*head1));
-		(*head1) = NULL;
-		if (c)
-			ft_printf("p%c\n", c);
-		return ;
-	}
 	old_head = *head1;
-	previus = old_head -> previus;
+	previus = old_head->previus;
 	next = old_head ->next;
-	previus -> next = (*head1) -> next;
-	next -> previus = (*head1) -> previus;
-	(*head1) = (*head1) -> next;
-	old_head -> next = NULL;
-	old_head -> previus = NULL;
+	previus->next = (*head1)->next;
+	next->previus = (*head1)->previus;
+	(*head1) = (*head1)->next;
+	old_head->next = NULL;
+	old_head->previus = NULL;
 	if (previus == next)
 	{
 		(*head1)->next = NULL;
@@ -87,3 +81,17 @@ void	ft_push(t_stack **head1, t_stack **head2, char c)
 		ft_printf("p%c\n", c);
 }
 
+static int	is_one_elem(t_stack **head1, t_stack **head2, char c)
+{
+	if (!*head1)
+		return (1);
+	if ((*head1)->next == NULL)
+	{
+		lstadd_front(head2, (*head1));
+		(*head1) = NULL;
+		if (c)
+			ft_printf("p%c\n", c);
+		return (1);
+	}
+	return (0);
+}

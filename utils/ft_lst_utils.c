@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lst_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsaraiva <nsaraiva@student.42porto.co      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/22 12:12:18 by nsaraiva          #+#    #+#             */
+/*   Updated: 2025/08/22 12:19:06 by nsaraiva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*lstnew(int content)
@@ -15,7 +27,7 @@ t_stack	*lstnew(int content)
 
 int	lst_size(t_stack *lst)
 {
-	t_stack *head;
+	t_stack	*head;
 	int		i;
 
 	i = 0;
@@ -32,31 +44,31 @@ int	lst_size(t_stack *lst)
 	return (i);
 }
 
-void lstclear(t_stack **lst)
+void	lstclear(t_stack **lst)
 {
-    t_stack *actual_pos;
-    t_stack *tmp;
+	t_stack	*actual_pos;
+	t_stack	*tmp;
 	t_stack	*head;
 
-    if (!lst || !*lst)
-        return;
-    actual_pos = *lst;
+	if (!lst || !*lst)
+		return ;
+	actual_pos = *lst;
 	head = actual_pos;
-    while (actual_pos != NULL)
-    {
-        tmp = actual_pos->next;
-        free(actual_pos);
-        actual_pos = tmp;
+	while (actual_pos != NULL)
+	{
+		tmp = actual_pos->next;
+		free(actual_pos);
+		actual_pos = tmp;
 		if (actual_pos == head)
-			break;
-    }
-    *lst = NULL;
+			break ;
+	}
+	*lst = NULL;
 }
 
 void	lstadd_front(t_stack **lst, t_stack *new_head)
 {
 	t_stack	*old_head;
-	t_stack *previus;
+	t_stack	*previus;
 
 	if (!*lst && new_head)
 	{
@@ -65,7 +77,7 @@ void	lstadd_front(t_stack **lst, t_stack *new_head)
 	}
 	if (!new_head)
 		return ;
-	previus = (*lst) -> previus;
+	previus = (*lst)->previus;
 	if (!previus)
 		previus = *lst;
 	old_head = (*lst);
@@ -80,7 +92,7 @@ void	lstadd_front(t_stack **lst, t_stack *new_head)
 void	lstadd_back(t_stack **lst, t_stack *new)
 {
 	t_stack	*next_node;
-	t_stack *first_pos;
+	t_stack	*first_pos;
 
 	if (!*lst && new)
 	{

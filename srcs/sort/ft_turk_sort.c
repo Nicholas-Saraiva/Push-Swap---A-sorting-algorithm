@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:02:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:18 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:07:14 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,18 @@ static void	modify_stacks_b(t_stack **a, t_stack **b,
 {
 	t_positions	pos;
 	int			size_a;
+	int			size_b;
 
 	size_a = lst_size(*a);
+	size_b = lst_size(*b);
 	less_cost = get_great_small(max_b, less_cost);
 	pos = get_positions(a, b, less_cost, max_b);
+	while (both_rotate(size_a, size_b, pos, 0
+		) && pos.a-- && pos.b--)
+		ft_rr(a, b);
+	while (both_rotate(size_a, size_b, pos, 1
+		) && pos.a++ && pos.b++)
+		ft_rrr(a, b);
 	while (pos.a < (0.5 + size_a / 2) && *a != less_cost)
 	{
 		ft_rotate(a, 'a');

@@ -6,12 +6,11 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:05:50 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/14 12:59:36 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 13:14:47 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-# include "push_swap.h"
+#include "push_swap.h"
 
 int	get_size(char **split)
 {
@@ -23,7 +22,7 @@ int	get_size(char **split)
 	return (i);
 }
 
-int *new_value(int value)
+int	*new_value(int value)
 {
 	int	*new_value;
 
@@ -47,24 +46,24 @@ int	ft_strtoi(const char *split, int *number)
 	{
 		if (*split == '-')
 			sign = -1;
-		split++;
+		if (!*(++split))
+			return (0);
 	}
 	while (split[++i] && (new_number >= INT_MIN || new_number <= INT_MAX))
 	{
-		if (split[i] < '0'  || split[i] > '9')
+		if (split[i] < '0' || split[i] > '9')
 			return (0);
 		new_number = split[i] - '0' + new_number * 10;
 	}
-	if ((new_number < INT_MIN || new_number > INT_MAX))
+	if ((new_number * sign < INT_MIN || new_number * sign > INT_MAX))
 		return (0);
-	*number = (int) (new_number * sign);
+	*number = (int)(new_number * sign);
 	return (1);
 }
 
-int		ft_max(const int a, const int b)
+int	ft_max(const int a, const int b)
 {
 	if (a > b)
 		return (a);
 	return (b);
 }
-

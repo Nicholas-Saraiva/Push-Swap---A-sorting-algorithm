@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:30:46 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/20 15:58:06 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 13:05:56 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	if (argc < 2 || !make_stack(argc, argv, &a))
 		return (0);
+	if (!a)
+		ft_error(&a, &b);
 	if (ft_is_sort(a))
 	{
 		lstclear(&a);
