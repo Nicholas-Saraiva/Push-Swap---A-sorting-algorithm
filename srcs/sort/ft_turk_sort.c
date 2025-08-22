@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:02:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/22 14:07:14 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:47:09 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 	size_b = lst_size(*b);
 	max_b = get_greater(min_cost, max_b);
 	position = get_positions(a, b, min_cost, max_b);
-	while (both_rotate(size_a, size_b, position, 0
-		) && position.a-- && position.b--)
+	while (before_middle(size_a, position.a) && before_middle(
+			size_b, position.b) && *a != min_cost && *b != max_b)
 		ft_rr(a, b);
-	while (both_rotate(size_a, size_b, position, 1
-		) && position.a++ && position.b++)
+	while (!before_middle(size_a, position.a) && !before_middle(
+			size_b, position.b) && *a != min_cost && *b != max_b)
 		ft_rrr(a, b);
-	while (before_middle(size_a, position.a) && *a != min_cost && position.a--)
+	while (before_middle(size_a, position.a) && *a != min_cost)
 		ft_rotate(a, 'a');
-	while (before_middle(size_b, position.b) && *b != max_b && position.b--)
+	while (before_middle(size_b, position.b) && *b != max_b)
 		ft_rotate(b, 'b');
-	while (!before_middle(size_a, position.a) && *a != min_cost && position.a++)
+	while (!before_middle(size_a, position.a) && *a != min_cost)
 		ft_reverse_rotate(a, 'a');
-	while (!before_middle(size_b, position.b) && *b != max_b && position.b++)
+	while (!before_middle(size_b, position.b) && *b != max_b)
 		ft_reverse_rotate(b, 'b');
 	ft_push(a, b, 'b');
 }
@@ -72,11 +72,10 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 int	both_rotate(int size_a, int size_b, t_positions pos, int mode)
 {
 	if (mode == 0)
-		return ((!(size_a - pos.a) || !(size_b - pos.b)) && before_middle(
+		return (pos.a && pos.b && before_middle(
 				size_a, pos.a) && before_middle(size_b, pos.b));
-	return ((!(size_a - pos.a) || !(size_b - pos.b)
-		) && !before_middle(size_a, pos.a
-		) && !before_middle(size_b, pos.b));
+	return (pos.a && pos.b && !before_middle(
+			size_a, pos.a) && !before_middle(size_b, pos.b));
 }
 
 static void	modify_stacks_b(t_stack **a, t_stack **b,
@@ -84,18 +83,10 @@ static void	modify_stacks_b(t_stack **a, t_stack **b,
 {
 	t_positions	pos;
 	int			size_a;
-	int			size_b;
 
 	size_a = lst_size(*a);
-	size_b = lst_size(*b);
 	less_cost = get_great_small(max_b, less_cost);
 	pos = get_positions(a, b, less_cost, max_b);
-	while (both_rotate(size_a, size_b, pos, 0
-		) && pos.a-- && pos.b--)
-		ft_rr(a, b);
-	while (both_rotate(size_a, size_b, pos, 1
-		) && pos.a++ && pos.b++)
-		ft_rrr(a, b);
 	while (pos.a < (0.5 + size_a / 2) && *a != less_cost)
 	{
 		ft_rotate(a, 'a');
