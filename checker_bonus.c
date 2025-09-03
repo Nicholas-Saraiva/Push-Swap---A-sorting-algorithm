@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 14:58:26 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/26 14:58:28 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:59:15 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,20 @@ int	main(int argc, char *argv[])
         else if (!ft_strncmp(buff, "sb\n", 3))
             ft_swap(&b, 0);
         else if (!ft_strncmp(buff, "ss\n", 3))
-            ft_ss(&a, &b);
-        else
-            ft_error(&a, &b);
+            ft_ss(&a, &b, 0);
+		else if (size == -1)
+			break ;
+		else
+			ft_error(&a, &b);
     }
 	if (ft_is_sort(a))
-        ft_printf("OK\n");
-    else
-        ft_printf("KO\n");
-    lstclear(&a);
-    lstclear(&b);
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+	if (a)
+		lstclear(&a);
+	if (b)
+		lstclear(&b);
     return (0);
 }
 

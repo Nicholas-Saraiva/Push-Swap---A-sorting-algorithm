@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 12:35:26 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/20 15:40:35 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:19:47 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_tiny_sort(t_stack **stack)
 			*stack)->content > previus->content)
 		ft_rotate(stack, 'a');
 	else
-		ft_swap(stack);
+		ft_swap(stack, 'a');
 }
 
 static int	worst_case(t_stack **stack)
@@ -60,7 +60,7 @@ static int	worst_case(t_stack **stack)
 	if (((*stack)->content > next->content) && (
 			next->content > previus->content))
 	{
-		ft_swap(stack);
+		ft_swap(stack, 'a');
 		ft_reverse_rotate(stack, 'a');
 		return (1);
 	}
@@ -68,7 +68,7 @@ static int	worst_case(t_stack **stack)
 				next->content > previus->content) && (
 				previus->content > (*stack)->content)))
 	{
-		ft_swap(stack);
+		ft_swap(stack, 'a');
 		ft_rotate(stack, 'a');
 		return (1);
 	}

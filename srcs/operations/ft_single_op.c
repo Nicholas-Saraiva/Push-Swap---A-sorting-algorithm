@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/22 12:10:48 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:16:25 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,50 @@
 
 static int	is_one_elem(t_stack **head1, t_stack **head2, char c);
 
-void	ft_swap(t_stack **head)
+void	ft_swap(t_stack **head, char c)
 {
 	t_stack	*old_head;
-	t_stack	*tail;
-	t_stack	*next;
-	t_stack	*tmp;
+
 
 	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
 		return ;
 	old_head = *head;
-	tail = (*head)->previus;
-	next = (*head)->next;
-	(*head) = next;
-	tmp = (*head)->next;
-	tail->next = (*head);
-	(*head)->previus = tail;
-	old_head->next = tmp;
-	tmp->previus = old_head;
-	(*head)->next = old_head;
-	old_head->previus = (*head);
-	ft_printf("sa\n");
+	(*head) = (*head)->next;
+	if (old_head->previus != old_head->next)
+	{
+		(*head)->next->previus = old_head;
+		old_head->next = (*head)->next->previus;
+		(*head)->next = old_head;
+		(*head)->previus = old_head->previus;
+		old_head->previus = (*head);
+	}
+	if (c)
+		ft_printf("s%c\n", c);
 }
+
+// void	ft_swap(t_stack **head, char c)
+// {
+// 	t_stack	*old_head;
+// 	t_stack	*tail;
+// 	t_stack	*next;
+// 	t_stack	*tmp;
+
+// 	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
+// 		return ;
+// 	old_head = *head;
+// 	tail = (*head)->previus;
+// 	next = (*head)->next;
+// 	(*head) = next;
+// 	tmp = (*head)->next;
+// 	tail->next = (*head);
+// 	(*head)->previus = tail;
+// 	old_head->next = tmp;
+// 	tmp->previus = old_head;
+// 	(*head)->next = old_head;
+// 	old_head->previus = (*head);
+// 	if (c)
+// 		ft_printf("s%c\n", c);
+// }
 
 void	ft_rotate(t_stack **head, char c)
 {

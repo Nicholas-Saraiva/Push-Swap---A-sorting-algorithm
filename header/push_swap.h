@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 12:32:39 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/08/22 12:23:38 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:57:28 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ int			ft_max(const int a, const int b);
 int			lst_size(t_stack *lst);
 
 //----------srcs/operations/single
-void		ft_swap(t_stack **stack);
+void		ft_swap(t_stack **stack, char c);
 void		ft_rotate(t_stack **stack, char c);
 void		ft_reverse_rotate(t_stack **stack, char c);
 void		ft_push(t_stack **head1, t_stack **head2, char c);
 
 //----------srcs/operations/dual
-void		ft_ss(t_stack **a, t_stack **b);
-void		ft_rr(t_stack **a, t_stack **b);
-void		ft_rrr(t_stack **a, t_stack **b);
+void		ft_ss(t_stack **a, t_stack **b, char c);
+void		ft_rr(t_stack **a, t_stack **b, char c);
+void		ft_rrr(t_stack **a, t_stack **b, char c);
 
 //---------srcs/sort
 int			ft_is_sort(t_stack *stack);
