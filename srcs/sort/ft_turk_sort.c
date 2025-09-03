@@ -16,7 +16,7 @@ static void	modify_stacks(t_stack **a, t_stack **b,
 				t_stack *less_cost, t_stack *max_b);
 static void	modify_stacks_b(t_stack **a, t_stack **b,
 				t_stack *less_cost, t_stack *max_b);
-static void	final_sorting_a(t_stack **a);
+static void	final_sorting(t_stack **a, char c);
 int			both_rotate(int size_a, int size_b, t_positions pos, int mode);
 
 void	turk_sort(t_stack **a, t_stack **b)
@@ -36,9 +36,10 @@ void	turk_sort(t_stack **a, t_stack **b)
 		modify_stacks(a, b, less_cost, max_b);
 	}
 	ft_tiny_sort(a);
+	//final_sorting(b, 'b');
 	while (*b)
 		modify_stacks_b(a, b, lst_max_value(a), *b);
-	final_sorting_a(a);
+	final_sorting(a, 'a');
 }
 
 static void	modify_stacks(t_stack **a, t_stack **b,
@@ -100,7 +101,7 @@ static void	modify_stacks_b(t_stack **a, t_stack **b,
 	ft_push(b, a, 'a');
 }
 
-static void	final_sorting_a(t_stack **a)
+static void	final_sorting(t_stack **a, char c)
 {
 	int		size;
 	t_stack	*max_b;
@@ -111,8 +112,8 @@ static void	final_sorting_a(t_stack **a)
 	if ((!(size % 2) && max_b->cost < size / 2) || (
 			max_b->cost < size / 2 + 1))
 		while ((*a) != max_b->next)
-			ft_rotate(a, 'a');
+			ft_rotate(a, c);
 	else
 		while ((*a) != max_b->next)
-			ft_reverse_rotate(a, 'a');
+			ft_reverse_rotate(a, c);
 }

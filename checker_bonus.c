@@ -1,0 +1,116 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 14:58:26 by nsaraiva          #+#    #+#             */
+/*   Updated: 2025/08/26 14:58:28 by nsaraiva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+static int	fill_stack(char *split, t_stack **a);
+static int	make_stack(int argc, char **argv, t_stack **a);
+
+int	main(int argc, char *argv[])
+{
+	t_stack	*a;
+	t_stack	*b;
+    int     size;
+    char    buff[4];
+    
+    buff[3] = '\0';
+    size = 1;
+	a = NULL;
+	b = NULL;
+	if (argc < 2 || !make_stack(argc, argv, &a))
+		return (0);
+	if (!a)
+		ft_error(&a, &b);
+    while(size)
+    {
+        size = 0;
+        size = read(0, &buff, sizeof(buff));
+        if (size > 4)
+            ft_error(&a, &b);
+        if (!size)
+            break ;
+        if (!ft_strncmp(buff, "ra\n", 3))
+            ft_rotate(&a, 0);
+        else if (!ft_strncmp(buff, "rb\n", 3))
+            ft_rotate(&b, 0);
+        else if (!ft_strncmp(buff, "rra\n", 4))
+            ft_reverse_rotate(&a,0);
+        else if (!ft_strncmp(buff, "rrb\n", 4))
+            ft_reverse_rotate(&b, 0); 
+        else if (!ft_strncmp(buff, "pa\n", 3))
+            ft_push(&b, &a, 0);
+        else if (!ft_strncmp(buff, "pb\n", 3))
+            ft_push(&a, &b, 0);
+        else if (!ft_strncmp(buff, "rr\n", 3))
+            ft_rr(&a, &b, 0);
+        else if (!ft_strncmp(buff, "rrr\n", 4))
+            ft_rrr(&a, &b, 0);
+        else if (!ft_strncmp(buff, "sa\n", 3))
+            ft_swap(&a, 0);
+        else if (!ft_strncmp(buff, "sb\n", 3))
+            ft_swap(&b, 0);
+        else if (!ft_strncmp(buff, "ss\n", 3))
+            ft_ss(&a, &b);
+        else
+            ft_error(&a, &b);
+    }
+	if (ft_is_sort(a))
+        ft_printf("OK\n");
+    else
+        ft_printf("KO\n");
+    lstclear(&a);
+    lstclear(&b);
+    return (0);
+}
+
+static int	make_stack(int argc, char **argv, t_stack **a)
+{
+	int		i;
+	int		j;
+	char	**split;
+
+	i = 0;
+	j = 0;
+	while (++i < argc)
+	{
+		split = ft_split(argv[i], ' ');
+		if (i != 1 && j != 1)
+			return (free_char_array(split), ft_error(a, (t_stack **) NULL), 0);
+		j = -1;
+		while (split[++j])
+			if (!fill_stack(split[j], a))
+				return (free_char_array(split), ft_error(
+						a, (t_stack **) NULL), 0);
+		if (i > 1 && j != 1)
+			return (free_char_array(split), ft_error(
+					a, (t_stack **) NULL), 0);
+		free_char_array(split);
+	}
+	return (1);
+}
+
+static int	fill_stack(char *split, t_stack **a)
+{
+	int			number;
+	t_stack		*new;
+
+	number = 0;
+	if (!ft_strtoi(split, &number))
+		return (0);
+	if (!check_lstrepetition(a, number))
+		return (0);
+	new = lstnew(number);
+	lstadd_back(a, new);
+	if (!a)
+		return (0);
+	return (1);
+}
