@@ -14,66 +14,76 @@
 
 static int	fill_stack(char *split, t_stack **a);
 static int	make_stack(int argc, char **argv, t_stack **a);
+static void	single_operation(t_stack **a, t_stack **b, char *buff);
+static void	ft_error_bonus(t_stack **a, t_stack **b, char *buff, int error);
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
 	t_stack	*b;
-    int     size;
-    char    buff[4];
-    
-    buff[3] = '\0';
-    size = 1;
+	char	*buff;
+
 	a = NULL;
 	b = NULL;
+	buff = 0;
 	if (argc < 2 || !make_stack(argc, argv, &a))
-		return (0);
-	if (!a)
 		ft_error(&a, &b);
-    while(size)
-    {
-        size = 0;
-        size = read(0, &buff, sizeof(buff));
-        if (size > 4)
-            ft_error(&a, &b);
-        if (!size)
-            break ;
-        if (!ft_strncmp(buff, "ra\n", 3))
-            ft_rotate(&a, 0);
-        else if (!ft_strncmp(buff, "rb\n", 3))
-            ft_rotate(&b, 0);
-        else if (!ft_strncmp(buff, "rra\n", 4))
-            ft_reverse_rotate(&a,0);
-        else if (!ft_strncmp(buff, "rrb\n", 4))
-            ft_reverse_rotate(&b, 0); 
-        else if (!ft_strncmp(buff, "pa\n", 3))
-            ft_push(&b, &a, 0);
-        else if (!ft_strncmp(buff, "pb\n", 3))
-            ft_push(&a, &b, 0);
-        else if (!ft_strncmp(buff, "rr\n", 3))
-            ft_rr(&a, &b, 0);
-        else if (!ft_strncmp(buff, "rrr\n", 4))
-            ft_rrr(&a, &b, 0);
-        else if (!ft_strncmp(buff, "sa\n", 3))
-            ft_swap(&a, 0);
-        else if (!ft_strncmp(buff, "sb\n", 3))
-            ft_swap(&b, 0);
-        else if (!ft_strncmp(buff, "ss\n", 3))
-            ft_ss(&a, &b, 0);
-		else if (size == -1)
-			break ;
-		else
-			ft_error(&a, &b);
-    }
+	while (get_next_line(0, &buff))
+	{
+		if (ft_strlen(buff) > 4)
+			ft_error_bonus(&a, &b, buff, 1);
+		single_operation(&a, &b, buff);
+		free(buff);
+	}
 	if (ft_is_sort(a))
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
+	ft_error_bonus(&a, &b, buff, 0);
+	return (0);
+}
+
+static void	single_operation(t_stack **a, t_stack **b, char *buff)
+{
+	if (!ft_strncmp(buff, "ra\n", 3))
+		ft_rotate(a, 0);
+	else if (!ft_strncmp(buff, "rb\n", 3))
+		ft_rotate(b, 0);
+	else if (!ft_strncmp(buff, "rra\n", 4))
+		ft_reverse_rotate(a, 0);
+	else if (!ft_strncmp(buff, "rrb\n", 4))
+		ft_reverse_rotate(b, 0);
+	else if (!ft_strncmp(buff, "pa\n", 3))
+		ft_push(b, a, 0);
+	else if (!ft_strncmp(buff, "pb\n", 3))
+		ft_push(a, b, 0);
+	else if (!ft_strncmp(buff, "sa\n", 3))
+		ft_swap(a, 0);
+	else if (!ft_strncmp(buff, "sb\n", 3))
+		ft_swap(b, 0);
+	else if (!ft_strncmp(buff, "rr\n", 3))
+		ft_rr(a, b, 0);
+	else if (!ft_strncmp(buff, "rrr\n", 4))
+		ft_rrr(a, b, 0);
+	else if (!ft_strncmp(buff, "ss\n", 3))
+		ft_ss(a, b, 0);
+	else
+		ft_error_bonus(a, b, buff, 1);
+}
+
+static void	ft_error_bonus(t_stack **a, t_stack **b, char *buff, int error)
+{
 	if (a)
-		lstclear(&a);
+		lstclear(a);
 	if (b)
-		lstclear(&b);
-    return (0);
+		lstclear(b);
+	if (buff)
+		free(buff);
+	if (error)
+	{
+		write(2, "Error\n", 6);
+		exit(-1);
+	}
 }
 
 static int	make_stack(int argc, char **argv, t_stack **a)

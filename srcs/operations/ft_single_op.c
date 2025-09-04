@@ -16,21 +16,22 @@ static int	is_one_elem(t_stack **head1, t_stack **head2, char c);
 
 void	ft_swap(t_stack **head, char c)
 {
-	t_stack	*old_head;
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*last;
 
-
-	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
+	if (!*head || !((*head)->next))
 		return ;
-	old_head = *head;
-	(*head) = (*head)->next;
-	if (old_head->previus != old_head->next)
-	{
-		(*head)->next->previus = old_head;
-		old_head->next = (*head)->next->previus;
-		(*head)->next = old_head;
-		(*head)->previus = old_head->previus;
-		old_head->previus = (*head);
-	}
+	first = *head;
+	second = first->next;
+	last = first->previus;
+	first->next = second->next;
+	second->next->previus = first;
+	second->previus = last;
+	second->next = first;
+	first->previus = second;
+	last->next = second;
+	*head = second;
 	if (c)
 		ft_printf("s%c\n", c);
 }

@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 16:00:49 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/09/03 18:29:57 by nsaraiva         ###   ########.fr       */
+/*   Created: 2025/05/11 17:46:15 by nsaraiva          #+#    #+#             */
+/*   Updated: 2025/07/11 21:40:57 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_error(t_stack **a, t_stack **b)
-{
-	if (a)
-		lstclear(a);
-	if (b)
-		lstclear(b);
-	write(2, "Error\n", 6);
-	exit(0);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+# include <stdlib.h>
+# include <unistd.h>
 
-void	free_char_array(char **array)
-{
-	int	i;
-
-	i = -1;
-	while (array[++i])
-		if (array[i])
-			free(array[i]);
-	if (array)
-		free(array);
-}
+int		check_nl(char *str);
+size_t	ft_strlen_gnl(const char *str);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*get_next_line(int fd, char **str);
+#endif

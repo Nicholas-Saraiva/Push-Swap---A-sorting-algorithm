@@ -36,7 +36,6 @@ void	turk_sort(t_stack **a, t_stack **b)
 		modify_stacks(a, b, less_cost, max_b);
 	}
 	ft_tiny_sort(a);
-	//final_sorting(b, 'b');
 	while (*b)
 		modify_stacks_b(a, b, lst_max_value(a), *b);
 	final_sorting(a, 'a');

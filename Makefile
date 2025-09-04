@@ -26,27 +26,32 @@ LIBFT = includes/libft
 LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
 PRINTF = includes/ft_printf
 PRINTF_A = $(addprefix $(PRINTF)/, ft_printf.a)
+GNL = includes/get_next_line
+GNL_A = $(addprefix $(GNL)/, libget.a)
 
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror -Iheader -g
 LIBRARIES = -L$(LIBFT) -lft -L$(PRINTF) -lftprintf
+
 NAME = push_swap
 BONUS_NAME = checker
 
 all: $(LIBFT_A) $(PRINTF_A) $(NAME)
 
-bonus: $(LIBFT_A) $(PRINTF_A) $(BONUS_NAME)
+bonus: $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(BONUS_NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBRARIES) -o $(NAME)
 
 $(BONUS_NAME): $(BONUS_OBJ)
-	$(CC) $(CCFLAGS) $(BONUS_OBJ) $(LIBRARIES) -o $(BONUS_NAME)
+	$(CC) $(CCFLAGS) $(BONUS_OBJ) $(LIBRARIES) -L$(GNL) -lget -o $(BONUS_NAME)
 
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT) all
 $(PRINTF_A):
 	$(MAKE) -C $(PRINTF) all
+$(GNL_A):
+	$(MAKE) -C $(GNL) all
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $< -o $@
@@ -56,13 +61,15 @@ clean:
 	rm -rf $(BONUS_OBJ)
 	$(MAKE) -C $(LIBFT) clean
 	$(MAKE) -C $(PRINTF) clean
+	$(MAKE) -C $(GNL) clean
 
 fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(BONUS_NAME)
 	$(MAKE) -C $(LIBFT) fclean
 	$(MAKE) -C $(PRINTF) fclean
+	$(MAKE) -C $(GNL) fclean
 
-re: fclean all
+re: fclean all bonus
 
 .PHONY: all clean fclean re
