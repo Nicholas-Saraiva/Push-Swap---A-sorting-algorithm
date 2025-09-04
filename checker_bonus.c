@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 14:58:26 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/09/03 17:59:15 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:50:34 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	main(int argc, char *argv[])
 	a = NULL;
 	b = NULL;
 	buff = 0;
-	if (argc < 2 || !make_stack(argc, argv, &a))
+	if (argc < 2)
+		return (0);
+	if (!make_stack(argc, argv, &a))
 		ft_error(&a, &b);
 	while (get_next_line(0, &buff))
 	{
@@ -35,7 +37,7 @@ int	main(int argc, char *argv[])
 		single_operation(&a, &b, buff);
 		free(buff);
 	}
-	if (ft_is_sort(a))
+	if (ft_is_sort(a) && !b)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
@@ -109,6 +111,8 @@ static int	make_stack(int argc, char **argv, t_stack **a)
 					a, (t_stack **) NULL), 0);
 		free_char_array(split);
 	}
+	if (!(*a))
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:50:22 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/09/03 18:16:25 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:33:58 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	ft_swap(t_stack **head, char c)
 
 	if (!*head || !((*head)->next))
 		return ;
+	if ((*head)->next == (*head)->previus)
+	{
+		*head = (*head)->next;
+		return ;
+	}
 	first = *head;
 	second = first->next;
 	last = first->previus;
@@ -35,30 +40,6 @@ void	ft_swap(t_stack **head, char c)
 	if (c)
 		ft_printf("s%c\n", c);
 }
-
-// void	ft_swap(t_stack **head, char c)
-// {
-// 	t_stack	*old_head;
-// 	t_stack	*tail;
-// 	t_stack	*next;
-// 	t_stack	*tmp;
-
-// 	if (!*head || (*head)->next == NULL || (*head)->previus == NULL)
-// 		return ;
-// 	old_head = *head;
-// 	tail = (*head)->previus;
-// 	next = (*head)->next;
-// 	(*head) = next;
-// 	tmp = (*head)->next;
-// 	tail->next = (*head);
-// 	(*head)->previus = tail;
-// 	old_head->next = tmp;
-// 	tmp->previus = old_head;
-// 	(*head)->next = old_head;
-// 	old_head->previus = (*head);
-// 	if (c)
-// 		ft_printf("s%c\n", c);
-// }
 
 void	ft_rotate(t_stack **head, char c)
 {
