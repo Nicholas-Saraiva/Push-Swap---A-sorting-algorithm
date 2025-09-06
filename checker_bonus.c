@@ -6,7 +6,7 @@
 /*   By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 14:58:26 by nsaraiva          #+#    #+#             */
-/*   Updated: 2025/09/04 14:50:34 by nsaraiva         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:44:03 by nsaraiva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	ft_error_bonus(t_stack **a, t_stack **b, char *buff, int error)
 	if (error)
 	{
 		write(2, "Error\n", 6);
-		exit(-1);
+		exit(1);
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: nsaraiva <nsaraiva@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 12:39:58 by nsaraiva          #+#    #+#              #
-#    Updated: 2025/08/20 14:49:35 by nsaraiva         ###   ########.fr        #
+#    Updated: 2025/09/06 12:23:28 by nsaraiva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,8 @@ BONUS_SRC += srcs/sort/ft_sort.c srcs/sort/ft_turk_sort.c srcs/sort/turk_cost_ut
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 LIBFT = includes/libft 
-LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
 PRINTF = includes/ft_printf
-PRINTF_A = $(addprefix $(PRINTF)/, ft_printf.a)
 GNL = includes/get_next_line
-GNL_A = $(addprefix $(GNL)/, libget.a)
 
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror -Iheader -g
@@ -36,22 +33,20 @@ LIBRARIES = -L$(LIBFT) -lft -L$(PRINTF) -lftprintf
 NAME = push_swap
 BONUS_NAME = checker
 
-all: $(LIBFT_A) $(PRINTF_A) $(NAME)
+all: $(NAME)
 
-bonus: $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(BONUS_NAME)
+bonus: $(BONUS_NAME)
 
 $(NAME): $(OBJ)
+	$(MAKE) -C $(PRINTF)
+	$(MAKE) -C $(LIBFT)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBRARIES) -o $(NAME)
 
 $(BONUS_NAME): $(BONUS_OBJ)
-	$(CC) $(CCFLAGS) $(BONUS_OBJ) $(LIBRARIES) -L$(GNL) -lget -o $(BONUS_NAME)
-
-$(LIBFT_A):
-	$(MAKE) -C $(LIBFT) all
-$(PRINTF_A):
-	$(MAKE) -C $(PRINTF) all
-$(GNL_A):
+	$(MAKE) -C $(PRINTF)
+	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(GNL) all
+	$(CC) $(CCFLAGS) $(BONUS_OBJ) $(LIBRARIES) -L$(GNL) -lget -o $(BONUS_NAME)
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $< -o $@
@@ -70,6 +65,6 @@ fclean: clean
 	$(MAKE) -C $(PRINTF) fclean
 	$(MAKE) -C $(GNL) fclean
 
-re: fclean all bonus
+re: fclean all
 
 .PHONY: all clean fclean re
